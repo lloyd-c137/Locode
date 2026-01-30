@@ -26,27 +26,74 @@ Locode 是一个基于 Web 的 AI 编程助手，类似于 Web 版本的 Cursor�
 
 ## 快速开始
 
-### 安装
+### 1. 克隆项目
 
 ```bash
-# 克隆仓库
 git clone https://github.com/lloyd-c137/locode.git
 cd locode
+```
 
-# 安装依赖
+### 2. 安装依赖
+
+```bash
 npm install
+```
 
-# 启动服务器
+### 3. 配置工作空间（必须）
+
+在项目根目录下创建 `.env` 文件并配置工作空间路径：
+
+```env
+WORKSPACE_PATH=D:\你的\工作空间\路径
+```
+
+**说明**：
+- 工作空间是允许访问的文件系统范围
+- 如果不配置，默认使用项目根目录作为工作空间
+- 出于安全考虑，系统限制所有文件操作都在工作空间内进行
+- Windows 路径示例：`WORKSPACE_PATH=D:\Developing\Locode\workspace`
+- Linux/Mac 路径示例：`WORKSPACE_PATH=/opt/project/workspace`
+
+### 4. 启动服务器
+
+```bash
 npm start
 ```
 
+或者使用开发模式（支持热重载）：
+
+```bash
+npm run dev
+```
+
+### 5. 配置 API（必须）
+
+在使用 AI 功能前，需要先配置 API 信息：
+
+1. 访问 http://localhost:3000
+2. 点击右上角的"设置"按钮
+3. 填写配置信息：
+   - **配置名称**：给你的配置起个名字（如"默认配置"）
+   - **API 地址**：输入你的 AI API 地址（例如：`https://api.siliconflow.cn/v1/chat/completions`）
+   - **API Key**：输入你的 API Key
+   - **模型名称**：输入要使用的模型名称（例如：`Qwen/Qwen2.5-Coder-7B-Instruct`）
+4. 点击"保存配置"
+5. 点击"设为默认"按钮
+
+**注意**：
+- 数据库会在服务器启动时自动初始化
+- 可以创建多个配置（如不同的 API Key 或不同的模型）
+- 建议设置其中一个为默认配置
+
+### 6. 开始使用
+
 访问 http://localhost:3000 开始使用！
 
-### 远程访问
+## 远程访问（可选）
 
 Locode 支持通过公网远程访问，让你可以在任何地方通过浏览器访问自己的本地开发环境。
 
-#### 访问远程界面
+### 访问远程界面
 
 在浏览器中访问：
 ```
@@ -58,7 +105,7 @@ http://<your-server-ip>:3000/remote
 https://your-domain.com/remote
 ```
 
-#### 连接步骤
+### 连接步骤
 
 1. 确保服务器已启动并配置了公网访问
 2. 在远程界面中输入服务器地址（例如：`ws://192.168.1.100:3000`）
@@ -69,7 +116,7 @@ https://your-domain.com/remote
    - 💻 执行终端命令
    - 🤖 与本地 AI 助手对话
 
-#### 安全建议
+### 安全建议
 
 - 🔐 使用访问密码保护连接
 - 🌐 考虑使用 HTTPS 加密连接
@@ -77,16 +124,6 @@ https://your-domain.com/remote
 - 🔄 定期更新服务器和依赖
 
 详细配置请查看 [远程访问指南](REMOTE_ACCESS.md)
-
-### 配置
-
-首次使用需要配置 API 信息：
-
-1. 点击右上角的"设置"按钮
-2. 填写 API 配置信息
-3. 保存并设置为默认配置
-
-详细配置说明请查看 [使用指南](#使用指南)
 
 ## 项目结构
 
@@ -113,226 +150,13 @@ locode/
 ├── media/                     # 静态资源目录
 │   └── locode.png             # Favicon 图标
 ├── .gitignore
+├── .env.example                # 环境变量示例
 ├── package.json
 ├── server.js                  # 后端服务器
 └── README.md
 ```
 
-## 安装步骤
-
-### 本地开发
-
-1. **克隆或下载项目**
-
-```bash
-cd locode
-```
-
-2. **安装依赖**
-
-```bash
-npm install
-```
-
-3. **启动服务器**
-
-```bash
-npm start
-```
-
-或者使用开发模式（支持热重载）：
-
-```bash
-npm run dev
-```
-
-### 服务器部署
-
-#### 在 Linux 服务器上部署
-
-1. **克隆项目**
-
-```bash
-cd /opt/project
-git clone https://github.com/lloyd-c137/locode.git
-cd locode
-```
-
-2. **安装构建工具**
-
-```bash
-# CentOS/RHEL
-sudo yum install -y python3 make gcc-c++
-
-# Ubuntu/Debian
-sudo apt-get update
-sudo apt-get install -y python3 make g++
-```
-
-3. **安装依赖**
-
-```bash
-npm install
-```
-
-4. **配置环境变量**
-
-创建 `.env` 文件：
-
-```env
-HOST=0.0.0.0
-PORT=3000
-WORKSPACE_PATH=/opt/project/workspace
-```
-
-5. **启动服务器**
-
-```bash
-npm start
-```
-
-#### 使用 PM2 管理进程（推荐）
-
-```bash
-# 安装 PM2
-npm install -g pm2
-
-# 启动服务
-pm2 start server.js --name locode
-
-# 查看日志
-pm2 logs locode
-
-# 重启服务
-pm2 restart locode
-
-# 停止服务
-pm2 stop locode
-```
-
-#### 使用 systemd 管理服务（生产环境）
-
-创建服务文件 `/etc/systemd/system/locode.service`：
-
-```ini
-[Unit]
-Description=Locode AI Coding Assistant
-After=network.target
-
-[Service]
-Type=simple
-User=root
-WorkingDirectory=/opt/project/locode
-ExecStart=/usr/bin/node /opt/project/locode/server.js
-Restart=always
-RestartSec=10
-
-[Install]
-WantedBy=multi-user.target
-```
-
-启动服务：
-
-```bash
-# 重载 systemd
-sudo systemctl daemon-reload
-
-# 启动服务
-sudo systemctl start locode
-
-# 设置开机自启
-sudo systemctl enable locode
-
-# 查看状态
-sudo systemctl status locode
-
-# 查看日志
-sudo journalctl -u locode -f
-```
-
-4. **配置工作空间（可选）**
-
-如果需要指定特定的工作空间目录，可以在项目根目录下创建 `.env` 文件并添加：
-
-```env
-WORKSPACE_PATH=D:\你的\工作空间\路径
-```
-
-如果不配置，默认使用项目根目录作为工作空间。
-
-5. **配置公网访问（可选）**
-
-如果需要在公网访问 Locode，可以配置以下环境变量：
-
-```env
-HOST=0.0.0.0
-HTTPS=false
-PORT=3000
-```
-
-- **HOST**：监听地址，`0.0.0.0` 表示监听所有网络接口
-- **HTTPS**：是否启用 HTTPS，`true` 或 `false`
-- **PORT**：端口号，默认 3000
-
-**启用 HTTPS（可选）**：
-
-如果需要 HTTPS 访问，需要准备 SSL 证书：
-
-```env
-HTTPS=true
-SSL_KEY=path/to/server.key
-SSL_CERT=path/to/server.cert
-```
-
-然后访问 `https://<your-ip-address>:3000`
-
-**获取公网 IP 地址**：
-
-Windows:
-```bash
-ipconfig
-```
-
-Linux/Mac:
-```bash
-ifconfig
-```
-
-或访问 https://ipinfo.io 获取公网 IP
-
-**防火墙设置**：
-
-确保防火墙允许访问配置的端口（默认 3000）。
-
-6. **访问应用**
-
-**本地访问**：
-打开浏览器，访问 `http://localhost:3000`
-
-**公网访问**：
-打开浏览器，访问 `http://<your-ip-address>:3000`
-
 ## 使用指南
-
-
-### API 配置
-
-在使用 AI 功能前，需要先配置 API 信息：
-
-1. 点击右上角的"设置"按钮
-2. 首次使用时，点击"初始化数据库"按钮检查数据库状态
-3. 填写配置信息：
-   - **配置名称**：给你的配置起个名字（如"默认配置"）
-   - **API 地址**：输入你的 AI API 地址
-   - **API Key**：输入你的 API Key
-   - **模型名称**：输入要使用的模型名称
-4. 点击"保存配置"
-5. 可以创建多个配置，并设置其中一个为默认配置
-
-**注意**：
-- 数据库会在服务器启动时自动初始化，"初始化数据库"按钮主要用于检查数据库状态
-- 如果点击"初始化数据库"按钮提示"数据库已经存在"，说明数据库已就绪，可以直接配置API
-- 如果提示"数据库初始化成功"，说明数据库已准备好，请继续配置API信息
 
 ### 文件浏览器
 
@@ -341,12 +165,6 @@ ifconfig
 - 点击文件夹可以展开/折叠
 - 点击文件可以在编辑器中打开
 - 使用底部的按钮可以创建新文件或文件夹
-
-**工作空间说明**：
-- 工作空间是允许访问的文件系统范围
-- 默认使用项目根目录作为工作空间
-- 可以通过 `.env` 文件中的 `WORKSPACE_PATH` 环境变量自定义工作空间路径
-- 出于安全考虑，系统限制所有文件操作都在工作空间内进行，无法访问工作空间外的文件
 
 ### 代码编辑器
 
@@ -427,6 +245,159 @@ ifconfig
   - Body: `{ messages: [{ role: "user|assistant|system", content: "消息内容" }], stream: true }`
   - 默认使用流式输出（`stream: true`），AI 回会逐字显示
   - 如需非流式输出，可设置 `stream: false`
+
+## 服务器部署（可选）
+
+### 在 Linux 服务器上部署
+
+#### 1. 克隆项目
+
+```bash
+cd /opt/project
+git clone https://github.com/lloyd-c137/locode.git
+cd locode
+```
+
+#### 2. 安装构建工具
+
+```bash
+# CentOS/RHEL
+sudo yum install -y python3 make gcc-c++
+
+# Ubuntu/Debian
+sudo apt-get update
+sudo apt-get install -y python3 make g++
+```
+
+#### 3. 安装依赖
+
+```bash
+npm install
+```
+
+#### 4. 配置工作空间（必须）
+
+创建 `.env` 文件：
+
+```env
+WORKSPACE_PATH=/opt/project/workspace
+```
+
+#### 5. 配置服务器（必须）
+
+创建 `.env` 文件：
+
+```env
+HOST=0.0.0.0
+PORT=3000
+```
+
+**说明**：
+- `HOST`：监听地址，`0.0.0.0` 表示监听所有网络接口
+- `PORT`：端口号，默认 3000
+
+#### 6. 启动服务器
+
+```bash
+npm start
+```
+
+### 使用 PM2 管理进程（推荐）
+
+```bash
+# 安装 PM2
+npm install -g pm2
+
+# 启动服务
+pm2 start server.js --name locode
+
+# 查看日志
+pm2 logs locode
+
+# 重启服务
+pm2 restart locode
+
+# 停止服务
+pm2 stop locode
+```
+
+### 使用 systemd 管理服务（生产环境）
+
+创建服务文件 `/etc/systemd/system/locode.service`：
+
+```ini
+[Unit]
+Description=Locode AI Coding Assistant
+After=network.target
+
+[Service]
+Type=simple
+User=root
+WorkingDirectory=/opt/project/locode
+ExecStart=/usr/bin/node /opt/project/locode/server.js
+Restart=always
+RestartSec=10
+
+[Install]
+WantedBy=multi-user.target
+```
+
+启动服务：
+
+```bash
+# 重载 systemd
+sudo systemctl daemon-reload
+
+# 启动服务
+sudo systemctl start locode
+
+# 设置开机自启
+sudo systemctl enable locode
+
+# 查看状态
+sudo systemctl status locode
+
+# 查看日志
+sudo journalctl -u locode -f
+```
+
+### 配置 HTTPS（可选）
+
+如果需要 HTTPS 访问，需要准备 SSL 证书：
+
+```env
+HTTPS=true
+SSL_KEY=path/to/server.key
+SSL_CERT=path/to/server.cert
+```
+
+然后访问 `https://<your-ip-address>:3000`
+
+### 获取公网 IP 地址
+
+Windows:
+```bash
+ipconfig
+```
+
+Linux/Mac:
+```bash
+ifconfig
+```
+
+或访问 https://ipinfo.io 获取公网 IP
+
+### 防火墙设置
+
+确保防火墙允许访问配置的端口（默认 3000）。
+
+### 访问应用
+
+**本地访问**：
+打开浏览器，访问 `http://localhost:3000`
+
+**公网访问**：
+打开浏览器，访问 `http://<your-ip-address>:3000`
 
 ## 安全说明
 
@@ -516,7 +487,6 @@ ifconfig
 - 使用强密码保护访问（如需要）
 - 定期检查访问日志
 - 考虑使用 VPN 或反向代理
-
 
 ## 开发建议
 
