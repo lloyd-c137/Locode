@@ -79,7 +79,7 @@ wss.on('connection', (ws) => {
 
 async function handleFileOperation(data) {
   const { operation, path: filePath, content } = data;
-  const ALLOWED_BASE_PATH = process.env.WORKSPACE_PATH || __dirname;
+  const ALLOWED_BASE_PATH = process.env.WORKSPACE_PATH || path.join(__dirname, 'workspace');
   
   function validatePath(requestedPath) {
     const resolvedPath = path.resolve(requestedPath);

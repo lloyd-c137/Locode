@@ -39,7 +39,7 @@ cd locode
 npm install
 ```
 
-### 3. 配置工作空间（必须）
+### 3. 配置工作空间（可选）
 
 在项目根目录下创建 `.env` 文件并配置工作空间路径：
 
@@ -49,7 +49,7 @@ WORKSPACE_PATH=D:\你的\工作空间\路径
 
 **说明**：
 - 工作空间是允许访问的文件系统范围
-- 如果不配置，默认使用项目根目录作为工作空间
+- 如果不配置，默认使用项目目录下的 `workspace` 文件夹作为工作空间
 - 出于安全考虑，系统限制所有文件操作都在工作空间内进行
 - Windows 路径示例：`WORKSPACE_PATH=D:\Developing\Locode\workspace`
 - Linux/Mac 路径示例：`WORKSPACE_PATH=/opt/project/workspace`
