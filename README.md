@@ -120,6 +120,8 @@ locode/
 
 ## 安装步骤
 
+### 本地开发
+
 1. **克隆或下载项目**
 
 ```bash
@@ -142,6 +144,120 @@ npm start
 
 ```bash
 npm run dev
+```
+
+### 服务器部署
+
+#### 在 Linux 服务器上部署
+
+1. **克隆项目**
+
+```bash
+cd /opt/project
+git clone https://github.com/lloyd-c137/locode.git
+cd locode
+```
+
+2. **安装构建工具**
+
+```bash
+# CentOS/RHEL
+sudo yum install -y python3 make gcc-c++
+
+# Ubuntu/Debian
+sudo apt-get update
+sudo apt-get install -y python3 make g++
+```
+
+3. **安装依赖**
+
+```bash
+npm install
+```
+
+**重要说明**：`better-sqlite3` 是原生模块，会在安装时自动编译。如果从 Windows 上部署到 Linux，必须删除 `node_modules` 并重新安装：
+
+```bash
+# 删除旧的 node_modules（如果从 Windows 复制）
+rm -rf node_modules
+
+# 重新安装（会自动编译）
+npm install
+```
+
+4. **配置环境变量**
+
+创建 `.env` 文件：
+
+```env
+HOST=0.0.0.0
+PORT=3000
+WORKSPACE_PATH=/opt/project/workspace
+```
+
+5. **启动服务器**
+
+```bash
+npm start
+```
+
+#### 使用 PM2 管理进程（推荐）
+
+```bash
+# 安装 PM2
+npm install -g pm2
+
+# 启动服务
+pm2 start server.js --name locode
+
+# 查看日志
+pm2 logs locode
+
+# 重启服务
+pm2 restart locode
+
+# 停止服务
+pm2 stop locode
+```
+
+#### 使用 systemd 管理服务（生产环境）
+
+创建服务文件 `/etc/systemd/system/locode.service`：
+
+```ini
+[Unit]
+Description=Locode AI Coding Assistant
+After=network.target
+
+[Service]
+Type=simple
+User=root
+WorkingDirectory=/opt/project/locode
+ExecStart=/usr/bin/node /opt/project/locode/server.js
+Restart=always
+RestartSec=10
+
+[Install]
+WantedBy=multi-user.target
+```
+
+启动服务：
+
+```bash
+# 重载 systemd
+sudo systemctl daemon-reload
+
+# 启动服务
+sudo systemctl start locode
+
+# 设置开机自启
+sudo systemctl enable locode
+
+# 查看状态
+sudo systemctl status locode
+
+# 查看日志
+sudo journalctl -u locode -f
 ```
 
 4. **配置工作空间（可选）**
