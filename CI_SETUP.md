@@ -219,7 +219,7 @@ kill $SERVER_PID
 在 README.md 中添加 CI 状态徽章：
 
 ```markdown
-![CI](https://github.com/yourusername/locode/workflows/CI/badge.svg)
+![CI](https://github.com/lloyd-c137/locode/workflows/CI/badge.svg)
 ```
 
 ## 常见问题

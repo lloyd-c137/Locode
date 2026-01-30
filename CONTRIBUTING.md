@@ -8,7 +8,7 @@
 
 如果你发现了 Bug，请：
 
-1. 在 [Issues](https://github.com/yourusername/locode/issues) 中搜索，确认该 Bug 是否已被报告
+1. 在 [Issues](https://github.com/lloyd-c137/locode/issues) 中搜索，确认该 Bug 是否已被报告
 2. 如果没有，创建一个新的 Issue，使用 Bug Report 模板
 3. 在 Issue 中提供详细的信息，包括：
    - 复现步骤
@@ -21,7 +21,7 @@
 
 如果你有新的功能建议：
 
-1. 先在 [Issues](https://github.com/yourusername/locode/issues) 中搜索，确认该功能是否已被建议
+1. 先在 [Issues](https://github.com/lloyd-c137/locode/issues) 中搜索，确认该功能是否已被建议
 2. 如果没有，创建一个新的 Issue，使用 Feature Request 模板
 3. 清晰地描述你的想法和用例
 
@@ -39,7 +39,7 @@
 
 ```bash
 # 克隆仓库
-git clone https://github.com/yourusername/locode.git
+git clone https://github.com/lloyd-c137/locode.git
 cd locode
 
 # 安装依赖

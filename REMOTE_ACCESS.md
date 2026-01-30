@@ -372,7 +372,7 @@ app.use(compression());
 如果遇到问题：
 1. 查看故障排除部分
 2. 检查服务器日志
-3. 提交 Issue：https://github.com/yourusername/locode/issues
+3. 提交 Issue：https://github.com/lloyd-c137/locode/issues
 
 ---
 

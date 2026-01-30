@@ -46,4 +46,4 @@
 ## 联系方式
 
 - 项目邮箱: contact@locode.dev
-- GitHub Issues: https://github.com/yourusername/locode/issues
+- GitHub Issues: https://github.com/lloyd-c137/locode/issues

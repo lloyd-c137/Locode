@@ -301,7 +301,7 @@ nc -zv <your-ip> 3000
 
 如果遇到问题，请：
 1. 查看常见问题部分
-2. 提交 Issue：https://github.com/yourusername/locode/issues
+2. 提交 Issue：https://github.com/lloyd-c137/locode/issues
 3. 查看安全文档：[SECURITY.md](SECURITY.md)
 
 ---

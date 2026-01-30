@@ -97,8 +97,8 @@
 ## 联系方式
 
 - 安全邮箱: security@locode.dev
-- GitHub Issues: https://github.com/yourusername/locode/issues
-- 主页: https://github.com/yourusername/locode
+- GitHub Issues: https://github.com/lloyd-c137/locode/issues
+- 主页: https://github.com/lloyd-c137/locode
 
 ## 致谢
 

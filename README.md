@@ -4,7 +4,7 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Node.js Version](https://img.shields.io/node/v/locode.svg)](https://nodejs.org/)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](http://makeapullrequest.com)
-[![GitHub Issues](https://img.shields.io/github/issues/yourusername/locode)](https://github.com/yourusername/locode/issues)
+[![GitHub Issues](https://img.shields.io/github/issues/lloyd-c137/locode)](https://github.com/lloyd-c137/locode/issues)
 
 Locode 是一个基于 Web 的 AI 编程助手，类似于 Web 版本的 Cursor。它允许用户通过浏览器界面与 AI 助手交互，进行代码编写、修改和优化，所有文件都存储在用户本地。
 
@@ -30,7 +30,7 @@ Locode 是一个基于 Web 的 AI 编程助手，类似于 Web 版本的 Cursor�
 
 ```bash
 # 克隆仓库
-git clone https://github.com/yourusername/locode.git
+git clone https://github.com/lloyd-c137/locode.git
 cd locode
 
 # 安装依赖
@@ -439,9 +439,9 @@ ifconfig
 
 ## 相关链接
 
-- [GitHub 仓库](https://github.com/yourusername/locode)
-- [Issue 跟踪](https://github.com/yourusername/locode/issues)
-- [Pull Requests](https://github.com/yourusername/locode/pulls)
+- [GitHub 仓库](https://github.com/lloyd-c137/locode)
+- [Issue 跟踪](https://github.com/lloyd-c137/locode/issues)
+- [Pull Requests](https://github.com/lloyd-c137/locode/pulls)
 - [更新日志](CHANGELOG.md)
 - [安全政策](SECURITY.md)
 
@@ -449,7 +449,7 @@ ifconfig
 
 如果这个项目对你有帮助，请给我们一个 ⭐️！
 
-[![Star History Chart](https://api.star-history.com/svg?repos=yourusername/locode&type=Date)](https://star-history.com/#yourusername/locode&Date)
+[![Star History Chart](https://api.star-history.com/svg?repos=lloyd-c137/locode&type=Date)](https://star-history.com/#lloyd-c137/locode&Date)
 
 ---
 
