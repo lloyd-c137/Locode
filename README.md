@@ -1,6 +1,6 @@
 # Locode - AI 编程助手
 
-[![CI](https://github.com/yourusername/locode/workflows/CI/badge.svg)](https://github.com/yourusername/locode/actions)
+[![CI](https://github.com/lloyd-c137/locode/workflows/CI/badge.svg)](https://github.com/lloyd-c137/locode/actions)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Node.js Version](https://img.shields.io/node/v/locode.svg)](https://nodejs.org/)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](http://makeapullrequest.com)
