@@ -32,24 +32,35 @@ class Chat {
         let apiConfig = null;
         
         try {
-          console.log('Fetching default config...');
-          const configResponse = await fetch('/api/config/default/full');
-          console.log('Config response status:', configResponse.status);
-          
-          if (configResponse.ok) {
-            const configData = await configResponse.json();
-            console.log('Config data:', configData);
-            if (configData.config) {
-              apiConfig = configData.config;
-              console.log('API Config loaded:', { 
-                name: apiConfig.name, 
-                apiUrl: apiConfig.api_url, 
-                model: apiConfig.model,
-                hasKey: !!apiConfig.api_key 
-              });
-            }
+          const currentConfig = localStorage.getItem('currentConfig');
+          if (currentConfig) {
+            apiConfig = JSON.parse(currentConfig);
+            console.log('Using config from localStorage:', { 
+              name: apiConfig.name, 
+              apiUrl: apiConfig.api_url, 
+              model: apiConfig.model,
+              hasKey: !!apiConfig.api_key 
+            });
           } else {
-            console.log('No default config found or error fetching config');
+            console.log('Fetching default config...');
+            const configResponse = await fetch('/api/config/default/full');
+            console.log('Config response status:', configResponse.status);
+            
+            if (configResponse.ok) {
+              const configData = await configResponse.json();
+              console.log('Config data:', configData);
+              if (configData.config) {
+                apiConfig = configData.config;
+                console.log('API Config loaded:', { 
+                  name: apiConfig.name, 
+                  apiUrl: apiConfig.api_url, 
+                  model: apiConfig.model,
+                  hasKey: !!apiConfig.api_key 
+                });
+              }
+            } else {
+              console.log('No default config found or error fetching config');
+            }
           }
         } catch (error) {
           console.error('Error loading API config:', error);

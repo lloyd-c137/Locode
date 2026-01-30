@@ -250,6 +250,9 @@ class Settings {
         this.modelInput.value = data.config.model;
         this.currentConfigId = configId;
         
+        localStorage.setItem('currentConfigId', configId);
+        localStorage.setItem('currentConfig', JSON.stringify(data.config));
+        
         alert('已加载配置');
       }
     } catch (error) {
