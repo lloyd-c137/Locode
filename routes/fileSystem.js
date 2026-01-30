@@ -4,7 +4,7 @@ const path = require('path');
 const iconv = require('iconv-lite');
 const router = express.Router();
 
-const ALLOWED_BASE_PATH = process.env.WORKSPACE_PATH || path.join(__dirname, '..');
+const ALLOWED_BASE_PATH = process.env.WORKSPACE_PATH || path.join(__dirname, '..', 'workspace');
 
 function validatePath(requestedPath) {
   const resolvedPath = path.resolve(requestedPath);
