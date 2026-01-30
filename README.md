@@ -103,7 +103,7 @@ locode/
 │   │   └── app.js             # 应用主逻辑
 │   └── index.html             # 主页面
 ├── routes/
-│   ├── chat.js               # AI 聊天 API 路由
+│   ├── siliconflow.js        # AI 聊天 API 路由
 │   ├── fileSystem.js          # 文件系统操作路由
 │   └── config.js              # 配置管理路由
 ├── db/
