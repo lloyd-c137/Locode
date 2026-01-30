@@ -14,7 +14,7 @@ router.get('/list', (req, res) => {
 
 router.get('/:id', (req, res) => {
   try {
-    const config = db.prepare('SELECT id, name, api_url, model, is_default FROM api_configs WHERE id = ?').get(req.params.id);
+    const config = db.prepare('SELECT * FROM api_configs WHERE id = ?').get(req.params.id);
     if (!config) {
       return res.status(404).json({ error: 'Config not found' });
     }
