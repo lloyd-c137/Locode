@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>猜数字游戏</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin-top: 50px;
+    }
+    input, button {
+      margin-top: 10px;
+      padding: 10px;
+      font-size: 16px;
+    }
+  </style>
+</head>
+<body>
+  <h1>猜数字游戏</h1>
+  <p>我已经想好了一个1到100之间的数字，你有5次机会猜出它。</p>
+  <input type="number" id="guessInput" placeholder="请输入你的猜测">
+  <button onclick="checkGuess()">猜猜看</button>
+  <p id="result"></p>
+
+  <script>
+    const secretNumber = Math.floor(Math.random() * 100) + 1;
+    let attempts = 5;
+    const resultElement = document.getElementById('result');
+
+    function checkGuess() {
+      const guess = parseInt(document.getElementById('guessInput').value);
+      if (isNaN(guess)) {
+        resultElement.textContent = '请输入一个有效的数字';
+        return;
+      }
+
+      attempts--;
+      if (guess === secretNumber) {
+        resultElement.textContent = `恭喜你，猜对了！答案是 ${secretNumber}`;
+        document.getElementById('guessInput').disabled = true;
+      } else if (guess < secretNumber) {
+        resultElement.textContent = `太小了！你还有 ${attempts} 次机会。`;
+      } else {
+        resultElement.textContent = `太大了！你还有 ${attempts} 次机会。`;
+      }
+
+      if (attempts === 0) {
+        resultElement.textContent = `很遗憾，游戏结束。正确答案是 ${secretNumber}`;
+        document.getElementById('guessInput').disabled = true;
+      }
+    }
+  </script>
+</body>
+</html>

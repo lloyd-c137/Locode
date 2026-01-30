@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Locode - Cloud mind, local code.</title>
+  <link rel="icon" type="image/png" href="../media/locode.png">
+  <link rel="stylesheet" href="css/style.css">
+  <script src="https://cdn.jsdelivr.net/npm/monaco-editor@0.45.0/min/vs/loader.js"></script>
+</head>
+<body>
+  <div class="app-container">
+    <header class="header">
+      <div style="display: flex; align-items: center;">
+        <button id="mobileMenuBtn" class="mobile-menu-btn">☰</button>
+        <div class="logo">Locode</div>
+      </div>
+      <div class="header-actions">
+        <button id="refreshFiles" class="btn btn-secondary">刷新文件</button>
+        <button id="toggleSettings" class="btn btn-secondary">设置</button>
+      </div>
+    </header>
+
+    <div id="overlay" class="overlay"></div>
+
+    <div class="main-content">
+      <aside class="sidebar">
+        <div class="sidebar-header">
+          <h3>文件浏览器</h3>
+        </div>
+        <div id="fileTree" class="file-tree"></div>
+        <div class="sidebar-footer">
+          <button id="createFile" class="btn btn-primary">新建文件</button>
+          <button id="createFolder" class="btn btn-secondary">新建文件夹</button>
+        </div>
+      </aside>
+
+      <main class="editor-section">
+        <div class="editor-header">
+          <div id="currentFile" class="current-file">未选择文件</div>
+          <div class="editor-actions">
+            <button id="runCode" class="btn btn-success">运行</button>
+            <button id="saveFile" class="btn btn-primary">保存</button>
+            <button id="deleteFile" class="btn btn-danger">删除</button>
+          </div>
+        </div>
+        <div id="editor" class="editor-container"></div>
+        <div id="preview" class="preview-container" style="display: none;">
+          <div class="preview-header">
+            <h3>代码预览</h3>
+            <button id="clearPreview" class="btn btn-secondary">清空</button>
+          </div>
+          <div id="previewContent" class="preview-content"></div>
+        </div>
+        <div id="terminal" class="terminal-container" style="display: none;">
+          <div class="terminal-header">
+            <h3>终端</h3>
+            <button id="clearTerminal" class="btn btn-secondary">清空</button>
+          </div>
+          <div id="terminalOutput" class="terminal-output"></div>
+          <div class="terminal-input-container">
+            <span class="terminal-prompt">$</span>
+            <input type="text" id="terminalInput" class="terminal-input" placeholder="输入命令...">
+            <button id="executeCommand" class="btn btn-primary">执行</button>
+          </div>
+        </div>
+        <div id="settings" class="settings-container" style="display: none;">
+          <div class="settings-header">
+            <h3>API 配置</h3>
+            <button id="closeSettings" class="btn btn-secondary">关闭</button>
+          </div>
+          <div class="settings-content">
+            <div class="settings-group">
+              <h4>新建配置</h4>
+              <div class="settings-item">
+                <label for="configName">配置名称</label>
+                <input type="text" id="configName" class="settings-input" placeholder="例如：默认配置">
+              </div>
+              <div class="settings-item">
+                <label for="apiUrl">API 地址</label>
+                <input type="text" id="apiUrl" class="settings-input" placeholder="https://api.siliconflow.cn/v1/chat/completions">
+              </div>
+              <div class="settings-item">
+                <label for="apiKey">API Key</label>
+                <input type="password" id="apiKey" class="settings-input" placeholder="输入 API Key">
+              </div>
+              <div class="settings-item">
+                <label for="model">模型名称</label>
+                <input type="text" id="model" class="settings-input" placeholder="Qwen/Qwen2.5-Coder-7B-Instruct">
+              </div>
+            </div>
+            <div class="settings-actions">
+              <button id="saveSettings" class="btn btn-primary">保存配置</button>
+              <button id="resetSettings" class="btn btn-secondary">重置表单</button>
+              <button id="initDatabase" class="btn btn-secondary">初始化数据库</button>
+            </div>
+            <div class="settings-group">
+              <h4>已保存的配置</h4>
+              <div id="savedConfigs" class="config-list">
+                <!-- 配置列表将通过JavaScript动态生成 -->
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="tabs-container">
+          <div id="tabs" class="tabs"></div>
+          <div id="previewTabs" class="preview-tabs">
+            <div class="preview-tab active" data-tab="editor">编辑器</div>
+            <div class="preview-tab" data-tab="preview">预览</div>
+            <div class="preview-tab" data-tab="terminal">终端</div>
+            <div class="preview-tab" data-tab="settings">设置</div>
+          </div>
+        </div>
+      </main>
+
+      <aside class="chat-section">
+        <div class="chat-header">
+          <h3>AI 助手</h3>
+        </div>
+        <div id="chatMessages" class="chat-messages"></div>
+        <div class="chat-input-container">
+          <textarea id="chatInput" placeholder="输入指令..."></textarea>
+          <button id="sendMessage" class="btn btn-primary">发送</button>
+        </div>
+      </aside>
+    </div>
+  </div>
+
+  <script src="js/api.js"></script>
+  <script src="js/editor.js"></script>
+  <script src="js/chat.js"></script>
+  <script src="js/settings.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
