@@ -30,9 +30,9 @@ router.post('/', async (req, res) => {
       return res.status(400).json({ error: 'Messages array is required' });
     }
 
-    let finalApiUrl = apiUrl || DEFAULT_API_URL;
-    let finalApiKey = apiKey || DEFAULT_API_KEY;
-    let finalModel = model || DEFAULT_MODEL;
+    let finalApiUrl = apiUrl;
+    let finalApiKey = apiKey;
+    let finalModel = model;
 
     if (!apiUrl || !apiKey || !model) {
       try {
@@ -46,6 +46,10 @@ router.post('/', async (req, res) => {
         console.error('Error fetching default config:', error);
       }
     }
+
+    finalApiUrl = finalApiUrl || DEFAULT_API_URL;
+    finalApiKey = finalApiKey || DEFAULT_API_KEY;
+    finalModel = finalModel || DEFAULT_MODEL;
 
     if (!finalApiKey) {
       console.error('No API Key available');
