@@ -175,16 +175,6 @@ sudo apt-get install -y python3 make g++
 npm install
 ```
 
-**重要说明**：`better-sqlite3` 是原生模块，会在安装时自动编译。如果从 Windows 上部署到 Linux，必须删除 `node_modules` 并重新安装：
-
-```bash
-# 删除旧的 node_modules（如果从 Windows 复制）
-rm -rf node_modules
-
-# 重新安装（会自动编译）
-npm install
-```
-
 4. **配置环境变量**
 
 创建 `.env` 文件：
