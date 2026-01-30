@@ -15,3 +15,4 @@ data/*.db-wal
 coverage/
 .nyc_output/
 workspace/
+/node_modules
