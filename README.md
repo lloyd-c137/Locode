@@ -510,7 +510,6 @@ ifconfig
 
 - [Monaco Editor](https://microsoft.github.io/monaco-editor/)
 - [Express.js](https://expressjs.com/)
-- [SiliconFlow](https://siliconflow.cn/)
 - 所有贡献者
 
 ## 相关链接
