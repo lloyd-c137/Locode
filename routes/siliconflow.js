@@ -1,6 +1,7 @@
 const express = require('express');
 const axios = require('axios');
 const router = express.Router();
+const db = require('../db/init');
 
 const DEFAULT_API_URL = 'https://api.siliconflow.cn/v1/chat/completions';
 const DEFAULT_API_KEY = process.env.SILICONFLOW_API_KEY;
@@ -29,9 +30,31 @@ router.post('/', async (req, res) => {
       return res.status(400).json({ error: 'Messages array is required' });
     }
 
-    const finalApiUrl = apiUrl || DEFAULT_API_URL;
-    const finalApiKey = apiKey || DEFAULT_API_KEY;
-    const finalModel = model || DEFAULT_MODEL;
+    let finalApiUrl = apiUrl || DEFAULT_API_URL;
+    let finalApiKey = apiKey || DEFAULT_API_KEY;
+    let finalModel = model || DEFAULT_MODEL;
+
+    if (!apiUrl || !apiKey || !model) {
+      try {
+        const defaultConfig = db.prepare('SELECT * FROM api_configs WHERE is_default = 1').get();
+        if (defaultConfig) {
+          finalApiUrl = finalApiUrl || defaultConfig.api_url;
+          finalApiKey = finalApiKey || defaultConfig.api_key;
+          finalModel = finalModel || defaultConfig.model;
+        }
+      } catch (error) {
+        console.error('Error fetching default config:', error);
+      }
+    }
+
+    if (!finalApiKey) {
+      console.error('No API Key available');
+      return res.status(400).json({ 
+        error: '请先配置 API 信息',
+        message: '请点击右上角的"设置"按钮，添加并设置一个默认的 API 配置。',
+        requiresConfig: true
+      });
+    }
 
     console.log('Using config:', {
       apiUrl: finalApiUrl,
@@ -39,11 +62,6 @@ router.post('/', async (req, res) => {
       model: finalModel,
       usingDefault: !apiUrl
     });
-
-    if (!finalApiKey) {
-      console.error('No API Key available');
-      return res.status(400).json({ error: 'API Key is required' });
-    }
 
     console.log('Sending request to SiliconFlow API...');
     

@@ -285,12 +285,15 @@ ${context}
       );
     } catch (error) {
       console.error('Error sending message:', error);
-      if (error.message.includes('API Key is required')) {
-        this.addMessage('assistant', '⚠️ 请先配置 API 信息\n\n点击右上角的"设置"按钮，然后：\n1. 填写配置名称\n2. 输入 API 地址\n3. 输入 API Key\n4. 选择模型\n5. 点击"保存配置"\n\n配置完成后，AI 就可以正常工作了。');
-      } else if (error.message.includes('No default config found')) {
+      
+      const errorMessage = error.message || '';
+      
+      if (errorMessage.includes('请先配置 API 信息') || errorMessage.includes('requiresConfig')) {
+        this.addMessage('assistant', '⚠️ 请先配置 API 信息\n\n点击右上角的"设置"按钮，然后：\n1. 填写配置名称\n2. 输入 API 地址\n3. 输入 API Key\n4. 输入模型名称\n5. 点击"保存配置"\n6. 点击"设为默认"按钮\n\n配置完成后，AI 就可以正常工作了。');
+      } else if (errorMessage.includes('No default config found') || errorMessage.includes('未找到默认配置')) {
         this.addMessage('assistant', '⚠️ 未找到默认配置\n\n请先在设置中创建并配置 API 信息，然后将其设置为默认配置。');
       } else {
-        this.addMessage('assistant', `❌ 发生了错误: ${error.message}\n\n请检查：\n1. API 配置是否正确\n2. API Key 是否有效\n3. 网络连接是否正常`);
+        this.addMessage('assistant', `❌ 发生了错误: ${errorMessage}\n\n请检查：\n1. API 配置是否正确\n2. API Key 是否有效\n3. 网络连接是否正常`);
       }
     }
   }
